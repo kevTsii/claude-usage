@@ -37,19 +37,40 @@ System dependencies: `python3-gi`, `python3-cairo`, `gir1.2-gtk-4.0`, `gir1.2-ad
 
 ## Installation
 
-Build the Debian package, then install it:
+### From the latest release (recommended)
+
+Download `claude-usage_<version>_all.deb` from the
+[Releases page](https://github.com/kevTsii/claude-usage/releases/latest), then install it from
+the folder where it was saved:
 
 ```bash
+sudo apt install ./claude-usage_1.0.0_all.deb
+```
+
+Or download it with the [GitHub CLI](https://cli.github.com/):
+
+```bash
+gh release download -R kevTsii/claude-usage --pattern '*.deb'
+sudo apt install ./claude-usage_*_all.deb
+```
+
+The leading `./` is required: without it, `apt` looks for a package in its repositories. `apt`
+may print a harmless notice about downloading "unsandboxed as root" when the file is in your
+home folder. The app then shows up as "Utilisation Claude" in the applications grid, and the
+`claude-usage` command is available. To update, install the newer `.deb` the same way: it
+replaces the previous version.
+
+### Build from source
+
+```bash
+git clone https://github.com/kevTsii/claude-usage.git
+cd claude-usage
 ./build-deb.sh
 sudo apt install ./dist/claude-usage_1.0.0_all.deb
 ```
 
-The leading `./` is required: without it, `apt` looks for a package in its repositories. The
-app then shows up as "Utilisation Claude" in the applications grid, and the `claude-usage`
-command is available. Once the package is installed, the project folder is no longer needed.
-
-For another version: `./build-deb.sh 1.0.1`, then install the new file with `sudo apt install`,
-which replaces the previous version.
+Pass a version to `build-deb.sh` to change the package number (for example
+`./build-deb.sh 1.0.1`). Once the package is installed, the project folder is no longer needed.
 
 ### Run without installing
 
